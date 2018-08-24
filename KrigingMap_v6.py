@@ -75,8 +75,8 @@ if SAURON:
   
   PA0 = {}
   
-  x = np.loadtxt('Krajnovic11_TableD1.txt', comments = '#', unpack = True, usecols = [0], dtype = 'str')
-  y = np.loadtxt('Krajnovic11_TableD1.txt', comments = '#', unpack = True, usecols = [1])
+  x = np.loadtxt('Data/ATLAS3D/Krajnovic11_TableD1.txt', comments = '#', unpack = True, usecols = [0], dtype = 'str')
+  y = np.loadtxt('Data/ATLAS3D/Krajnovic11_TableD1.txt', comments = '#', unpack = True, usecols = [1])
   for GalName in Galaxies:
     PA0[GalName] = y[np.where(x == GalName)]
 
@@ -92,7 +92,7 @@ for GalName in Galaxies:
     print vel0[GalName]
     vel_sys = float(vel0[GalName])
     if (SAURON == False):
-      pathMajor = '../../Data/SKiMS_latest/deimos_ppxf_'+str(GalName)+'.fits'
+      pathMajor = 'Data/SKiMS_latest/deimos_ppxf_'+str(GalName)+'.fits'
       
       Identifier = {'vel':'VEL', 'sigma':'VELDISP', 'h3':'H3', 'h4':'H4', 'SN':'SN'}
       if (Property=='vrms'):
@@ -179,7 +179,7 @@ for GalName in Galaxies:
     
     ##  extract velocities from ATLAS3d/SAURON
     if SAURON or SLUGGSplusATLAS:
-      ATLAS_path = '../../Data/ATLAS3D/'
+      ATLAS_path = 'Data/ATLAS3D/'
       try:
         # print glob.glob(ATLAS_path+'atlas3d_stellar_kinematics/*/PXF_*'+str(GalName)+'*.fits')
         data=pyfits.getdata(glob.glob(ATLAS_path+'atlas3d_stellar_kinematics/*/PXF_*'+str(GalName)+'*.fits')[0], 0)
@@ -224,7 +224,7 @@ for GalName in Galaxies:
         z_atlas, ez_atlas = numpy.delete(z_atlas, index, None), numpy.delete(ez_atlas, index, None)
 
     if Norris:
-      data=pyfits.getdata('../Norris06/Norris06_NGC3115.fits', 0)
+      data=pyfits.getdata('Data/Norris06/Norris06_NGC3115.fits', 0)
       
       X, Y=data['ra'], data['dec']
       # SAURON data has flipped the RA axis - we swap this to make it consistent with SKiMS data
@@ -246,7 +246,7 @@ for GalName in Galaxies:
         z_norris, ez_norris = numpy.array(h4), numpy.array(h4Err)
 
     if GC:
-      GC_filename = DropboxDirectory+'Dropbox/PhD_Analysis/Data/SLUGGS_GC_RVs/'+GalName+'_GC_BinnedKinematics.txt'
+      GC_filename = 'Data/SLUGGS_GC_RVs/'+GalName+'_GC_BinnedKinematics.txt'
       # if not os.path.isfile(GC_filename):
       #   GC = False
       #   print 'No GC data'
